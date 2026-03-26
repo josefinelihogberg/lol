@@ -1,45 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>MemoryGame</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
-</head>
+    <link
+      rel="stylesheet"
+      href="style.css" />
+    <script
+      src="app.js"
+      defer></script>
+  </head>
 
-<body>
+  <body>
     <h1>Memory</h1>
     <div class="start-container">
-        <label for="Spelare 1">Spelare 1:</label>
-        <input class="playerone-name-field" type="text" placeholder="Skriva namn på spelare 1">
-        <br>
-        <label for="Spelare 2">Spelare 2:</label>
-        <input class="playertwo-name-field" type="text" placeholder="Skriva namn på spelare 2">
-        <button class="game-start-btn">Starta spelet</button>
+      <label for="playerone">Spelare 1:</label>
+      <input
+        id="playerone"
+        class="playerone-name-field"
+        type="text"
+        placeholder="Skriva namn på spelare 1" />
+      <br />
+      <label for="playertwo">Spelare 2:</label>
+      <input
+        id="playertwo"
+        class="playertwo-name-field"
+        type="text"
+        placeholder="Skriva namn på spelare 2" />
+      <button class="game-start-btn">Starta spelet</button>
     </div>
 
     <div class="memory-game">
-        <header>
-            Nu är det <label class="player-turn-lbl">namn_på_spelare</label>s tur
-        </header>
-        <div class="score-display-container">
-            <p>Poäng:</p>
-            <p class="player-one-score"></p>
-            <p class="player-two-score"></p>
-        </div>
-        <button class="game-restart-btn"><a href="index.html">Spela igen</a></button>
+      <header>Nu är det <label class="player-turn-lbl">namn_på_spelare</label>s tur</header>
+      <div class="score-display-container">
+        <p>Poäng:</p>
+        <p class="player-one-score"></p>
+        <p class="player-two-score"></p>
+      </div>
+      <button class="game-restart-btn"><a href="index.html">Spela igen</a></button>
     </div>
 
-    <div class="card-container">
-
-    </div>
-    <footer class="main-footer">
-        to my loved Linnea Oskar Lovisa
-    </footer>
-</body>
-
+    <div class="card-container"></div>
+    <footer class="main-footer">to my loved Linnea Oskar Lovisa</footer>
+  </body>
 </html>
