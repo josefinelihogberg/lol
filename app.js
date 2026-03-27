@@ -177,16 +177,95 @@ function updateScores() {
     if (players[0].score + players[1].score == cardsArray.length / 2) {
         if (players[0].score > players[1].score) {
             header.innerText =`${players[0].name} vann!`;
+            triggerConfetti();
             restartGame();
          } else if (players[0].score < players[1].score){
             header.innerText =`${players[1].name} vann!`;
+            triggerConfetti();
             restartGame();
          } else {
             header.innerText = "Oavgjort!";
+            triggerHandshake();
             restartGame();
          } 
     }
  }
+
+function triggerConfetti() {
+    // 先尝试使用 confetti.js 库
+    if (typeof ConfettiGenerator !== 'undefined') {
+        const confettiSettings = {
+            target: 'confetti-canvas',
+            max: 200,
+            size: 1,
+            animate: true,
+            props: ['circle', 'square'],
+            colors: [[255, 215, 0], [255, 223, 0], [218, 165, 32], [184, 134, 11], [255, 250, 205]],
+            clock: 25,
+            interval: null,
+            rotate: false,
+            start_velocity: 25,
+            velocity_decay: 0.85
+        };
+        const confetti = new ConfettiGenerator(confettiSettings);
+        confetti.render();
+        setTimeout(() => confetti.clear(), 4000);
+    }
+    
+    // 添加金币符号
+    createMoneyElements();
+}
+
+function createMoneyElements() {
+    const moneySymbols = ['💰', '💵', '💴', '💶', '💷', '🤑'];
+    
+    for (let i = 0; i < 150; i++) {
+        const money = document.createElement('div');
+        money.textContent = moneySymbols[Math.floor(Math.random() * moneySymbols.length)];
+        money.style.position = 'fixed';
+        money.style.left = Math.random() * 100 + '%';
+        money.style.top = '-50px';
+        money.style.fontSize = Math.random() * 25 + 35 + 'px';
+        money.style.pointerEvents = 'none';
+        money.style.zIndex = '9998';
+        money.style.setProperty('--x-offset', (Math.random() - 0.5) * 500 + 'px');
+        money.className = 'falling-money';
+        
+        document.body.appendChild(money);
+        
+        setTimeout(() => money.remove(), 3500);
+    }
+}
+
+function triggerHandshake() {
+    const handshakeContainer = document.createElement('div');
+    handshakeContainer.style.position = 'fixed';
+    handshakeContainer.style.top = '50%';
+    handshakeContainer.style.left = '50%';
+    handshakeContainer.style.transform = 'translate(-50%, -50%)';
+    handshakeContainer.style.fontSize = '120px';
+    handshakeContainer.style.zIndex = '9998';
+    handshakeContainer.style.pointerEvents = 'none';
+    handshakeContainer.textContent = '🤝';
+    
+    document.body.appendChild(handshakeContainer);
+    
+    // 握手动画
+    const keyframes = [
+        { transform: 'translate(-50%, -50%) scale(0.3) rotate(-30deg)', opacity: 0 },
+        { transform: 'translate(-50%, -50%) scale(1) rotate(0deg)', opacity: 1, offset: 0.3 },
+        { transform: 'translate(-50%, -50%) scale(1.2) rotate(10deg)', opacity: 1, offset: 0.5 },
+        { transform: 'translate(-50%, -50%) scale(1) rotate(-10deg)', opacity: 1, offset: 0.7 },
+        { transform: 'translate(-50%, -50%) scale(0.8) rotate(0deg)', opacity: 0 }
+    ];
+    
+    handshakeContainer.animate(keyframes, {
+        duration: 3000,
+        easing: 'ease-in-out'
+    });
+    
+    setTimeout(() => handshakeContainer.remove(), 3000);
+}
      
 // Check cards if they match
 const checkCards = () => {
